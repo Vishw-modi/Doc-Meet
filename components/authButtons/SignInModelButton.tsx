@@ -2,7 +2,7 @@
 
 import { SignInButton } from "@clerk/nextjs";
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 type SignInModelButtonProps = {
   text?: string;
