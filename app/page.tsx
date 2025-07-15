@@ -5,10 +5,7 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <div className="pt-16">
-        <h1>Home</h1>
-        <Button>Button</Button>
-      </div>
+      <div className="bg-background"></div>
     </div>
   );
 }
