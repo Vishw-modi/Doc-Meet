@@ -38,6 +38,8 @@ export const checkUser = async () => {
                 }
             }
         }) 
+        console.log("New User Created", newUser.role);
+        
         return newUser
     } catch (error: Error | unknown) {
         console.log("CheckUser Function Error", error);
