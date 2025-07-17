@@ -50,13 +50,13 @@ export default function Home() {
             </div>
 
             <div className="relative h-[400px] lg:h-[500px] rounded-xl overflow-hidden">
-              <Image
+              {/* <Image
                 src="/banner2.png"
                 alt="Doctor consultation"
                 fill
                 priority
                 className="object-cover md:pt-14 rounded-xl"
-              />
+              /> */}
             </div>
           </div>
         </div>

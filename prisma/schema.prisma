@@ -41,7 +41,6 @@ model User {
   doctorAppointments  Appointment[]        @relation("DoctorAppointments")
   availabilities      Availability[]
   transactions        CreditTransactions[]
-  Appointment         Appointment[]
 }
 
 model Availability {
@@ -73,8 +72,6 @@ model Appointment {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?
 
   @@index([doctorId, startTime])
   @@index([status, startTime])
