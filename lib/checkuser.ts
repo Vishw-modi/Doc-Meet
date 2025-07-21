@@ -11,9 +11,25 @@ export const checkUser = async () => {
     }
 
     try {
-        const loggedInUser = await db.User.findUnique({
+        const loggedInUser = await db.user.findUnique({
             where: {
                 clerkUserId: user.id
+            },
+            include: {
+                transactions: {
+                    where: {
+                        type: "CREDIT_PURCHASE",
+                        createdAt: {
+                            gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1)
+                        }
+
+                    },
+
+                    orderBy: {
+                        createdAt: "desc",
+                    },
+                    take: 1
+                }
             }
         })
 
@@ -36,7 +52,12 @@ export const checkUser = async () => {
                         amount: 2
                     }
                 }
-            }
+                
+            },
+            include:{
+                transactions: true
+             }
+
         }) 
         console.log("New User Created", newUser.role);
         

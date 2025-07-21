@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 // import Pricing from "@/components/pricing";
 import { creditBenefits, features, testimonials } from "@/lib/data";
 import SignUpButton from "@/components/authButtons/SignUpButton";
+import Pricing from "@/components/Pricing";
 export default function Home() {
   return (
     <div className="bg-background">
@@ -98,7 +99,10 @@ export default function Home() {
       </section>
 
       {/* Pricing Section with green medical styling */}
-      <section id="pricing" className="py-20">
+      <div id="pricing">
+        <Pricing />
+      </div>
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge
