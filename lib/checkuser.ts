@@ -48,7 +48,7 @@ export const checkUser = async () => {
                 transactions: {
                     create: {
                         type: "CREDIT_PURCHASE",
-                        packageId: "1",
+                        packageId: "Inital_2_credits",
                         amount: 2
                     }
                 }

@@ -11,20 +11,24 @@ import {
 import { Button } from "./ui/button";
 import { checkUser } from "@/lib/checkuser";
 import { RoleBasedActions } from "./shared/RoleBasedActions";
-import {
-  checkAndAllocateCredits,
-  userWithTransactions,
-} from "@/actions/credits";
+import { checkAndAllocateCredits } from "@/actions/credits";
 import { Badge } from "./ui/badge";
 import { CreditCard } from "lucide-react";
+import { auth } from "@clerk/nextjs/server";
 
 const Header = async () => {
-  const user: userWithTransactions = await checkUser();
+  const user = await checkUser();
+
+  console.log("User before check", user);
+  const { orgId, userId, sessionClaims, getToken, has } = await auth();
+  console.log(sessionClaims);
+  // console.log("authUser", authUser);
+
   if (user?.role === "PATIENT") {
     await checkAndAllocateCredits(user);
   }
-  await console.log("User Check: ", user);
-  await console.log("Users lateest transaction: ", user?.transactions[0]);
+  // await console.log("User after Check: ", user);
+  // await console.log("Users lateest transaction: ", user?.transactions[0]);
 
   return (
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-10 supports-[backdrop-filter]:bg-background/60 ">
