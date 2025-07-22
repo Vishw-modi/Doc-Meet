@@ -3,8 +3,6 @@
 import { db } from "@/lib/prisma"
 import { auth } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
-import { NextResponse } from "next/server"
 
 export async function setUserRole(formData: FormData) {
 const role = formData.get("role")
@@ -44,10 +42,10 @@ try {
 
     if(role.toString().toUpperCase() === "DOCTOR"){
 
-        const speciality = formData.get("speciality") 
-        const experience = parseInt(formData.get("experience"), 10 )
-        const credentialUrl = formData.get("credentialUrl")
-        const description = formData.get("description")
+        const speciality = formData.get("speciality") as string
+        const experience = formData.get("experience") as string
+        const credentialUrl = formData.get("credentialUrl") as string
+        const description = formData.get("description") as string
 
         if(!speciality || !experience || !credentialUrl || !description){
             throw new Error("All fields are required")
@@ -67,12 +65,32 @@ try {
             }
         })
         revalidatePath("/")
-        redirect("/doctors/verification")
-        return {message: "Success", status:200, }
+        return {message: "Success", status:200, redirect:"/doctors/verification"}
     }
 } catch (error) {
     console.error(error)
-    return NextResponse.json({message: "Error"}, {status:500})
+    throw new Error(`Something went wrong in the server while updating the user role : ${error instanceof Error ? error.message : String(error)}`)
 }
 
+}
+
+export async function getCurrentUser() {
+    const {userId} = await auth()
+    
+    if(!userId) {
+        throw new Error("Unauthorized")
+    }
+try {
+    
+    const user = await db.user.findUnique({
+        where: {
+            clerkUserId: userId
+        }
+    })
+    return user
+} catch (error) {
+    console.error("error while fetching user",error);
+    throw new Error(`Something went wrong in the server while fetching the user : ${error instanceof Error ?  error.message : String(error)}`)
+    
+}
 }
