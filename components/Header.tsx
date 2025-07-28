@@ -20,8 +20,8 @@ const Header = async () => {
   const user = await checkUser();
 
   console.log("User before check", user);
-  const { orgId, userId, sessionClaims, getToken, has } = await auth();
-  console.log(sessionClaims);
+  // const {sessionClaims } = await auth();
+  // console.log(sessionClaims);
   // console.log("authUser", authUser);
 
   if (user?.role === "PATIENT") {
