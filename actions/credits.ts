@@ -14,7 +14,7 @@ const PLAN_CREDITS = {
     premium_plan: 20,
 }
 
-const APPOINTMENT_COST = 2
+// const APPOINTMENT_COST = 2
 
 export async function checkAndAllocateCredits(user: userWithTransactions | null){
     
