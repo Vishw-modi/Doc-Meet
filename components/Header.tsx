@@ -14,7 +14,6 @@ import { RoleBasedActions } from "./shared/RoleBasedActions";
 import { checkAndAllocateCredits } from "@/actions/credits";
 import { Badge } from "./ui/badge";
 import { CreditCard } from "lucide-react";
-import { auth } from "@clerk/nextjs/server";
 
 const Header = async () => {
   const user = await checkUser();

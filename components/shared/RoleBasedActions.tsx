@@ -9,7 +9,7 @@ export const RoleBasedActions = ({ role }: Props) => {
   if (role === "UNASSIGNED") {
     return (
       <>
-        <Link href="/onBoarding">
+        <Link href="/onboarding">
           <Button
             variant="outline"
             className="hidden md:inline-flex items-center gap-2"
@@ -19,7 +19,7 @@ export const RoleBasedActions = ({ role }: Props) => {
           </Button>
         </Link>
 
-        <Link href="/onBoarding">
+        <Link href="/onboarding">
           <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
             <User className="h-4 w-4" />
           </Button>

@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { toast } from "sonner";
 
-const useFetch = (cb: unknown) => {
+const useFetch = (cb) => {
   const [data, setData] = useState(null);
-  const [error, setError] = useState<string | null>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>("");
 
   const fn = async (...args: any[]) => {
     setLoading(true);
@@ -14,8 +15,10 @@ const useFetch = (cb: unknown) => {
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
+        toast.error(error.message);
       }
       setError("An unknown Error Occured in useFetch");
+      toast.error("Error occured in useFetch");
     } finally {
       setLoading(false);
     }
